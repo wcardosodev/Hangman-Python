@@ -52,6 +52,7 @@ while got_word == False:
 shown_word = "*" * len(random_word)
 guesses_left = max_guesses
 new_list = []
+letters_already_guessed = []
 print("Your word is: %s" % (shown_word))
 
 while guesses_left > 0:
@@ -60,6 +61,16 @@ while guesses_left > 0:
 
     print("Enter your guess")
     guess = input().lower()
+    while guess in letters_already_guessed:
+        print("You have already guessed that letter, please guess again")
+        guess = input().lower()
+
+    while len(guess) > 1:
+        print("You can only guess one letter at a time please guess again")
+        guess = input().lower()
+    
+    letters_already_guessed.append(guess)
+
     if random_word.find(guess) != -1:
         for i, value in enumerate(random_word):
             if value == guess:
